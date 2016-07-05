@@ -3,14 +3,14 @@ import java.io.Serializable;
 /**
  * A simple result wrapper around the Volume object that was sent over the wire.
  */
-public class CreateVolumeResult extends JCSResult implements Serializable, Cloneable {
+public class CreateSnapshotResult extends JCSResult implements Serializable, Cloneable {
 
     /**
      * <p>
      * Describes a volume.
      * </p>
      */
-    private Volume volume;
+    private Snapshot snapshot;
 
     /**
      * <p>
@@ -21,8 +21,8 @@ public class CreateVolumeResult extends JCSResult implements Serializable, Clone
      *        Describes a volume.
      */
 
-    public void setVolume(Volume volume) {
-        this.volume = volume;
+    public void setSnapshot(Snapshot snapshot) {
+        this.snapshot = snapshot;
     }
 
     /**
@@ -33,8 +33,8 @@ public class CreateVolumeResult extends JCSResult implements Serializable, Clone
      * @return Describes a volume.
      */
 
-    public Volume getVolume() {
-        return this.volume;
+    public Snapshot getSnapshot() {
+        return this.snapshot;
     }
 
     /**
@@ -48,8 +48,8 @@ public class CreateVolumeResult extends JCSResult implements Serializable, Clone
      *         chained together.
      */
 
-    public CreateVolumeResult withVolume(Volume volume) {
-        setVolume(volume);
+    public CreateSnapshotResult withSnapshot(Snapshot snapshot) {
+        setSnapshot(snapshot);
         return this;
     }
 
@@ -79,13 +79,13 @@ public class CreateVolumeResult extends JCSResult implements Serializable, Clone
         if (obj == null)
             return false;
 
-        if (obj instanceof CreateVolumeResult == false)
+        if (obj instanceof CreateSnapshotResult == false)
             return false;
-        CreateVolumeResult other = (CreateVolumeResult) obj;
-        if (other.getVolume() == null ^ this.getVolume() == null)
+        CreateSnapshotResult other = (CreateSnapshotResult) obj;
+        if (other.getSnapshot() == null ^ this.getSnapshot() == null)
             return false;
-        if (other.getVolume() != null
-                && other.getVolume().equals(this.getVolume()) == false)
+        if (other.getSnapshot() != null
+                && other.getSnapshot().equals(this.getSnapshot()) == false)
             return false;
         return true;
     }
@@ -96,14 +96,14 @@ public class CreateVolumeResult extends JCSResult implements Serializable, Clone
         int hashCode = 1;
 
         hashCode = prime * hashCode
-                + ((getVolume() == null) ? 0 : getVolume().hashCode());
+                + ((getSnapshot() == null) ? 0 : getSnapshot().hashCode());
         return hashCode;
     }
 
     @Override
-    public CreateVolumeResult clone() {
+    public CreateSnapshotResult clone() {
         try {
-            return (CreateVolumeResult) super.clone();
+            return (CreateSnapshotResult) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new IllegalStateException(
                     "Got a CloneNotSupportedException from Object.clone() "

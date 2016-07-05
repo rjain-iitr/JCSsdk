@@ -50,7 +50,6 @@ public class Authorization {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		params.put("Timestamp", sdf.format(Calendar.getInstance().getTime()));
-		//System.out.println(params.get("Timestamp"));
 	}
 	
 	public static String getUtf8Value(String value){
@@ -89,9 +88,6 @@ public class Authorization {
 	public void addAuthorization(Map<String, String> params) throws NoSuchAlgorithmException, InvalidKeyException, IllegalStateException, UnsupportedEncodingException{
 		Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
 		String canonicalString = this.stringToSign(params);
-//		System.out.println(this.protocol);
-//		System.out.println(this.host);
-		System.out.println(canonicalString);
 		SecretKeySpec secret_key = new SecretKeySpec(this.secretKey.getBytes(), "HmacSHA256");
 		sha256_HMAC.init(secret_key);
 		String hash = Base64.encodeBase64String(sha256_HMAC.doFinal(canonicalString.getBytes("UTF-8")));

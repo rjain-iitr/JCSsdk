@@ -26,9 +26,7 @@ public class JCStry {
          * credential profile by reading from the credentials file located at
          * (/home/shubham/.aws/credentials).
          */
-        JCSCredentials credentials = null;
-        
-            credentials = new JCSCredentials() {
+        JCSCredentials credentials = new JCSCredentials() {
 
         		@Override
         		public String getJCSAccessKey() {
@@ -62,40 +60,44 @@ public class JCStry {
 
         init();
 
-        /*
-         * Amazon EC2
-         *
-         * The AWS EC2 client allows you to create, delete, and administer
-         * instances programmatically.
-         *
-         * In this sample, we use an EC2 client to get a list of all the
-         * availability zones, and all instances sorted by reservation id.
-         */
+        
         try {
-            //DescribeAvailabilityZonesResult availabilityZonesResult = ec2.describeAvailabilityZones();
-            //System.out.println("You have access to " + availabilityZonesResult.getAvailabilityZones().size() +
-                    //" Availability Zones.");
-            
-            CreateVolumeRequest createVolumeRequest = new CreateVolumeRequest();
-            createVolumeRequest.setSize(1);
-            //System.out.println("yyyyyyy");
-            jcs.createVolume(createVolumeRequest);
-            //System.out.println("xxxxxxx");
-            //List<Reservation> reservations = describeInstancesRequest.getReservations();
-            //Set<Instance> instances = new HashSet<Instance>();
-            
-            //DescribeVolumesResult describevolumesresult = ec2.describeVolumes();
-            //for (Reservation reservation : reservations) {
-            //    instances.addAll(reservation.getInstances());
-            //}
-            //System.out.println("You have "+ describevolumesresult.getVolumes().size() +" Volumes");
-            //System.out.println("You have " + instances.size() + " Amazon EC2 instance(s) running.");
+                        
+//            CreateVolumeRequest createVolumeRequest = new CreateVolumeRequest();
+//            createVolumeRequest.setSize(5);
+//            createVolumeRequest.setSnapshotId("6dca164c-bb90-45ae-8d01-9832966c16a2");
+//            CreateVolumeResult createVolumeResult = jcs.createVolume(createVolumeRequest);
+//            System.out.println(createVolumeResult.toString());
+//            
+//            DeleteVolumeRequest deleteVolumeRequest = new DeleteVolumeRequest().withVolumeId("9b723f6d-292d-4be7-95c4-079c659cd8c7");
+//            DeleteVolumeResult deleteVolumeResult = jcs.deleteVolume(deleteVolumeRequest);
+//            System.out.println(deleteVolumeResult.toString());
+//            
+//        	DescribeVolumesRequest describeVolumesRequest = new DescribeVolumesRequest();
+//        	DescribeVolumesResult describeVolumesResult = jcs.describeVolumes(describeVolumesRequest);
+//        	//System.out.println(describeVolumesResult.toString());
+        	
+//        	List<Volume> volumes = describeVolumesResult.getVolumes();
+//        	for(Volume volume:volumes){
+//        		System.out.println(volume.toString());
+//        	}
+//        	
+//        	CreateSnapshotRequest createSnapshotRequest = new CreateSnapshotRequest()
+//        													.withVolumeId("dcf77516-92e0-4406-b5f4-9550f7d0f34b");
+//        	CreateSnapshotResult createSnapshotResult = jcs.createSnapshot(createSnapshotRequest);
+        	
+//        	DeleteSnapshotRequest deleteSnapshotRequest = new DeleteSnapshotRequest().
+//        							withSnapshotId("4c43dd83-0856-43ba-857d-59a4a7492785");
+//        	DeleteSnapshotResult deleteSnapshotResult = jcs.deleteSnapshot(deleteSnapshotRequest);
+//        	
+//      	
+        	DescribeSnapshotsRequest describeSnapshotsRequest = new DescribeSnapshotsRequest();
+        	DescribeSnapshotsResult describeSnapshotsResult = jcs.describeSnapshots(describeSnapshotsRequest);
+        	System.out.println(describeSnapshotsRequest.toString());
         } catch (Exception e) {
         	e.printStackTrace();
         
-        }
-
-        
+        }        
     }
 }
 
