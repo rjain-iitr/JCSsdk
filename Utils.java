@@ -17,4 +17,10 @@ public class Utils {
 		}
 		return protocolAndHost;
 	}
+	public static boolean isNullOrEmpty(String value) {
+        if (value == null) {
+            return true;
+        }
+        return value.isEmpty();
+    }
 }

@@ -69,13 +69,13 @@ public class JCStry {
 //            CreateVolumeResult createVolumeResult = jcs.createVolume(createVolumeRequest);
 //            System.out.println(createVolumeResult.toString());
 //            
-//            DeleteVolumeRequest deleteVolumeRequest = new DeleteVolumeRequest().withVolumeId("9b723f6d-292d-4be7-95c4-079c659cd8c7");
+//            DeleteVolumeRequest deleteVolumeRequest = new DeleteVolumeRequest().withVolumeId("703eace6-dd8a-4841-a359-d6d333e59944");
 //            DeleteVolumeResult deleteVolumeResult = jcs.deleteVolume(deleteVolumeRequest);
 //            System.out.println(deleteVolumeResult.toString());
 //            
-//        	DescribeVolumesRequest describeVolumesRequest = new DescribeVolumesRequest();
-//        	DescribeVolumesResult describeVolumesResult = jcs.describeVolumes(describeVolumesRequest);
-//        	//System.out.println(describeVolumesResult.toString());
+        	DescribeVolumesRequest describeVolumesRequest = new DescribeVolumesRequest();
+        	DescribeVolumesResult describeVolumesResult = jcs.describeVolumes(describeVolumesRequest);
+        	System.out.println(describeVolumesResult.toString());
         	
 //        	List<Volume> volumes = describeVolumesResult.getVolumes();
 //        	for(Volume volume:volumes){
@@ -91,9 +91,9 @@ public class JCStry {
 //        	DeleteSnapshotResult deleteSnapshotResult = jcs.deleteSnapshot(deleteSnapshotRequest);
 //        	
 //      	
-        	DescribeSnapshotsRequest describeSnapshotsRequest = new DescribeSnapshotsRequest();
-        	DescribeSnapshotsResult describeSnapshotsResult = jcs.describeSnapshots(describeSnapshotsRequest);
-        	System.out.println(describeSnapshotsRequest.toString());
+//        	DescribeSnapshotsRequest describeSnapshotsRequest = new DescribeSnapshotsRequest();
+//        	DescribeSnapshotsResult describeSnapshotsResult = jcs.describeSnapshots(describeSnapshotsRequest);
+//        	System.out.println(describeSnapshotsResult.toString());
         } catch (Exception e) {
         	e.printStackTrace();
         

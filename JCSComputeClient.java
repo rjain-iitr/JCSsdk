@@ -1,5 +1,7 @@
 
 import https.compute_ind_.west_1_jiocloudservices_com.doc._2016_03_01.*;
+
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,12 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
 import org.apache.http.annotation.ThreadSafe;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.xml.sax.InputSource;
 
 import javax.xml.bind.JAXBContext;  
+import javax.xml.bind.JAXBException;
 //simport javax.xml.bind.JAXBException;  
 import javax.xml.bind.Unmarshaller;  
  
