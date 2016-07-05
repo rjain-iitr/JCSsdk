@@ -54,11 +54,7 @@ public class JCStry {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("===========================================");
-        System.out.println("Welcome to the AWS Java SDK!");
-        System.out.println("===========================================");
-
-        init();
+       init();
 
         
         try {
