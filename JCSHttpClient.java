@@ -1,8 +1,4 @@
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Map;
-
-import org.apache.http.HttpResponse;
 import org.apache.http.annotation.ThreadSafe;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -27,14 +23,7 @@ public abstract class JCSHttpClient {
 		addCustomHeaders(headers);
 		Authorization authorization = new Authorization(endpoint.toString() , "POST", credentials.getJCSAccessKey(),credentials.getJCSSecretKey(), headers);
 		authorization.addAuthorization(params);
-		String url = this.endpoint;
-		url += "/?";
-		for(String key: params.keySet()){
-			url += key+"="+params.get(key)+"&";
-		}
-		//URI uri = uriBuilder.build();
-		url = url.substring(0,url.length()-1);
-	
+		String url = getUrl(params);	
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		HttpPost httpPost = new HttpPost(url);
 		
@@ -42,10 +31,18 @@ public abstract class JCSHttpClient {
 			httpPost.addHeader(header, headers.get(header));
 		}
 		
-		System.out.println();
-		System.out.println(httpPost.getURI());
 		CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpPost);
 		return closeableHttpResponse;
+	}
+	
+	private String getUrl(Map<String, String> params){
+		String url = this.endpoint;
+		url += "/?";
+		for(String key: params.keySet()){
+			url += key+"="+params.get(key)+"&";
+		}
+		url = url.substring(0,url.length()-1);
+		return url;
 	}
 
 }

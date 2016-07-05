@@ -1,14 +1,14 @@
-import java.io.Serializable;
 import java.util.Date;
 
-public class Volume implements Serializable, Cloneable {
-    private String volumeId;
+
+public class Snapshot {
+	private String volumeId;
 
     private Integer size;
 
     private String snapshotId;
 
-    private Date createTime;
+    private Date startTime;
     
     private String status;
     
@@ -22,7 +22,7 @@ public class Volume implements Serializable, Cloneable {
     }
 
 
-    public Volume withVolumeId(String volumeId) {
+    public Snapshot withVolumeId(String volumeId) {
         setVolumeId(volumeId);
         return this;
     }
@@ -41,7 +41,7 @@ public class Volume implements Serializable, Cloneable {
 
     
 
-    public Volume withSize(Integer size) {
+    public Snapshot withSize(Integer size) {
         setSize(size);
         return this;
     }
@@ -60,26 +60,26 @@ public class Volume implements Serializable, Cloneable {
 
     
 
-    public Volume withSnapshotId(String snapshotId) {
+    public Snapshot withSnapshotId(String snapshotId) {
         setSnapshotId(snapshotId);
         return this;
     }
 
     
 
-    public void setCreateTime(java.util.Date createTime) {
-        this.createTime = createTime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     
-    public java.util.Date getCreateTime() {
-        return this.createTime;
+    public Date getStartTime() {
+        return this.startTime;
     }
 
     
 
-    public Volume withCreateTime(java.util.Date createTime) {
-        setCreateTime(createTime);
+    public Snapshot withStartTime(Date startTime) {
+        setStartTime(startTime);
         return this;
     }
     
@@ -92,7 +92,7 @@ public class Volume implements Serializable, Cloneable {
 		this.status = status;
 	}
 	
-	public Volume withStatus(String status) {
+	public Snapshot withStatus(String status) {
         setStatus(status);
         return this;
     }
@@ -101,12 +101,13 @@ public class Volume implements Serializable, Cloneable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
+        if (getSnapshotId() != null)
+            sb.append("SnapshotId: " + getSnapshotId() + ",");
+        
         if (getVolumeId() != null)
             sb.append("VolumeId: " + getVolumeId() + ",");
         if (getSize() != null)
             sb.append("Size: " + getSize() + ",");
-        if (getSnapshotId() != null)
-            sb.append("SnapshotId: " + getSnapshotId() + ",");
         sb.append("}");
         return sb.toString();
     }
@@ -121,6 +122,11 @@ public class Volume implements Serializable, Cloneable {
         if (obj instanceof Volume == false)
             return false;
         Volume other = (Volume) obj;
+        if (other.getSnapshotId() == null ^ this.getSnapshotId() == null)
+            return false;
+        if (other.getSnapshotId() != null
+                && other.getSnapshotId().equals(this.getSnapshotId()) == false)
+            return false;
         if (other.getVolumeId() == null ^ this.getVolumeId() == null)
             return false;
         if (other.getVolumeId() != null
@@ -131,11 +137,7 @@ public class Volume implements Serializable, Cloneable {
         if (other.getSize() != null
                 && other.getSize().equals(this.getSize()) == false)
             return false;
-        if (other.getSnapshotId() == null ^ this.getSnapshotId() == null)
-            return false;
-        if (other.getSnapshotId() != null
-                && other.getSnapshotId().equals(this.getSnapshotId()) == false)
-            return false;
+        
                
         return true;
     }
@@ -146,11 +148,12 @@ public class Volume implements Serializable, Cloneable {
         int hashCode = 1;
 
         hashCode = prime * hashCode
+                + ((getSnapshotId() == null) ? 0 : getSnapshotId().hashCode());
+        hashCode = prime * hashCode
                 + ((getVolumeId() == null) ? 0 : getVolumeId().hashCode());
         hashCode = prime * hashCode
                 + ((getSize() == null) ? 0 : getSize().hashCode());
-        hashCode = prime * hashCode
-                + ((getSnapshotId() == null) ? 0 : getSnapshotId().hashCode());
+        
         
         return hashCode;
     }
@@ -165,5 +168,6 @@ public class Volume implements Serializable, Cloneable {
                             + "even though we're Cloneable!", e);
         }
     }
+
 
 }
