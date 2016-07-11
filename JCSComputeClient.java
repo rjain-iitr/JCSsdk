@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
 import org.apache.http.annotation.ThreadSafe;
@@ -29,7 +31,7 @@ import javax.xml.bind.Unmarshaller;
 @ThreadSafe
 public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 	
-	
+	private static final Log log = LogFactory.getLog(JCSComputeClient.class);
 	private JCSCredentialsProvider jcsCredentialsProvider;
 
 	/*
@@ -96,7 +98,7 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 		
 		try{
 			if(response.getStatusLine().getStatusCode()==200){
-				System.out.println(response.getStatusLine());
+				log.debug(response.getStatusLine());
 			    HttpEntity entity = response.getEntity();
 			    String content = EntityUtils.toString(entity);
 			    
@@ -153,7 +155,7 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 		
 		try{
 			if(response.getStatusLine().getStatusCode()==200){
-				System.out.println(response.getStatusLine());
+				log.debug(response.getStatusLine());
 			    HttpEntity entity = response.getEntity();
 			    String content = EntityUtils.toString(entity);
 			    
@@ -211,7 +213,7 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 		
 		try{
 			if(response.getStatusLine().getStatusCode()==200){
-				System.out.println(response.getStatusLine());
+				log.debug(response.getStatusLine());
 			    HttpEntity entity = response.getEntity();
 			    String content = EntityUtils.toString(entity);
 			    			    
@@ -272,7 +274,7 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 		
 		try{
 			if(response.getStatusLine().getStatusCode()==200){
-				System.out.println(response.getStatusLine());
+				log.debug(response.getStatusLine());
 			    HttpEntity entity = response.getEntity();
 			    String content = EntityUtils.toString(entity);
 			    			    
@@ -328,7 +330,7 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 		
 		try{
 			if(response.getStatusLine().getStatusCode()==200){
-				System.out.println(response.getStatusLine());
+				log.debug(response.getStatusLine());
 			    HttpEntity entity = response.getEntity();
 			    String content = EntityUtils.toString(entity);
 			    			    
@@ -387,7 +389,7 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 		
 		try{
 			if(response.getStatusLine().getStatusCode()==200){
-				System.out.println(response.getStatusLine());
+				log.debug(response.getStatusLine());
 			    HttpEntity entity = response.getEntity();
 			    String content = EntityUtils.toString(entity);
 			  			    
