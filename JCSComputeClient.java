@@ -1,40 +1,66 @@
-
-import https.compute_ind_.west_1_jiocloudservices_com.doc._2016_03_01.*;
-
 import java.io.IOException;
 import java.io.StringReader;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
+import org.apache.http.HttpException;
 import org.apache.http.annotation.ThreadSafe;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.xml.sax.InputSource;
 
+import xmlParser.CreateSnapshotResponse;
+import xmlParser.CreateVolumeResponse;
+import xmlParser.DeleteSnapshotResponse;
+import xmlParser.DeleteVolumeResponse;
+import xmlParser.DescribeSnapshotsResponse;
+import xmlParser.DescribeVolumesResponse;
+
 import javax.xml.bind.JAXBContext;  
 import javax.xml.bind.JAXBException;
-//simport javax.xml.bind.JAXBException;  
 import javax.xml.bind.Unmarshaller;  
- 
 
 @ThreadSafe
 public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 	
 	
 	private JCSCredentialsProvider jcsCredentialsProvider;
+
+	/*
+	Constructs a new client to invoke service methods on JCS Client. A credentials provider chain will be used that searches for credentials in this order:
+	Environment Variables - ACCESS_KEY and SECRET_KEY
+	Java System Properties - ACCESS_KEY and SECRET_KEY
+	All service calls made using this new client object are blocking, and will not return until the service call completes.
+	 */
 	
 	public JCSComputeClient(){
 		this(new DefaultJCSCredentialsProviderChain()); 
 	}
 	
+	/*
+	Constructs a new client to invoke service methods on JCS Client using the specified JCS account credentials.
+	All service calls made using this new client object are blocking, and will not return until the service call completes.
+	Parameters:
+	jcsCredentials - The JCS credentials (access key ID and secret key) to use when authenticating with JCS services.
+	 */
+	
 	public JCSComputeClient(JCSCredentials jcsCredentials){
 		this.jcsCredentialsProvider = new StaticCredentialsProvider(jcsCredentials);
 		init();
     }
+	
+	/*
+	Constructs a new client to invoke service methods on JCS Client using the specified JCS account credentials provider.
+	All service calls made using this new client object are blocking, and will not return until the service call completes.
+	Parameters:
+	jcsCredentialsProvider- The JCS credentials provider which will provide credentials to authenticate requests with JCS services.
+	*/
 	
 	public JCSComputeClient(JCSCredentialsProvider jcsCredentialsProvider){
         this.jcsCredentialsProvider = jcsCredentialsProvider;
@@ -45,8 +71,18 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
         this.setEndpoint("https://compute.ind-west-1.staging.jiocloudservices.com");
     }
 	
+	/*
+	Creates an SBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. You can create a new empty volume or restore a volume from an SBS snapshot.
+	Specified by:
+	createVolume in interface JCSCompute
+	Parameters:
+	createVolumeRequest - Contains the parameters for CreateVolume.
+	Returns:
+	Result of the CreateVolume operation returned by the service.
+	*/
+	
 	@Override
-	public CreateVolumeResult createVolume(CreateVolumeRequest createVolumeRequest) throws Exception {
+	public CreateVolumeResult createVolume(CreateVolumeRequest createVolumeRequest) throws InvalidKeyException, NoSuchAlgorithmException, IllegalStateException, ClientProtocolException, IOException, JAXBException, HttpException{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "CreateVolume");
 		if(createVolumeRequest.getSize() != null){
@@ -84,16 +120,28 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 				return createVolumeResult;
 
 			}
-			else throw new Exception(response.getStatusLine().toString());
+			else throw new HttpException(response.getStatusLine().toString());
 		} finally {
 		    response.close();
 		}
 		
 	}
 
+	/*
+	Deletes the specified SBS volume. The volume must be in the available state (not attached to an instance).
+	The volume may remain in the deleting state for several minutes.
+	
+	Specified by:
+	deleteVolume in interface JCSCompute
+	Parameters:
+	deleteVolumeRequest - Contains the parameters for DeleteVolume.
+	Returns:
+	Result of the DeleteVolume operation returned by the service.
+	*/
+	
 	@Override
 	public DeleteVolumeResult deleteVolume(
-			DeleteVolumeRequest deleteVolumeRequest) throws Exception {
+			DeleteVolumeRequest deleteVolumeRequest)throws InvalidKeyException, NoSuchAlgorithmException, IllegalStateException, ClientProtocolException, IOException, JAXBException, HttpException{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "DeleteVolume");
 		if(deleteVolumeRequest.getVolumeId() != null){
@@ -124,14 +172,25 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 				return deleteVolumeResult;
 
 			}
-			else throw new Exception(response.getStatusLine().toString());
+			else throw new HttpException(response.getStatusLine().toString());
 		} finally {
 		    response.close();
 		}
 	}
+
+	/*
+	Describes the specified SBS volumes. If you are describing a long list of volumes, you can paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeVolumes request to retrieve the remaining results.
+	Specified by:
+	describeVolumes in interface JCSCompute
+	Parameters:
+	describeVolumesRequest - Contains the parameters for DescribeVolumes.
+	Returns:
+	Result of the DescribeVolumes operation returned by the service.
+	*/
 	
 	@Override
-	public DescribeVolumesResult describeVolumes(DescribeVolumesRequest describeVolumesRequest) throws  Exception{
+	public DescribeVolumesResult describeVolumes(DescribeVolumesRequest describeVolumesRequest)
+			throws InvalidKeyException, NoSuchAlgorithmException, IllegalStateException, ClientProtocolException, IOException, JAXBException, HttpException{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "DescribeVolumes");
 		if(describeVolumesRequest.getMaxResults() != null){
@@ -180,15 +239,28 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 				return describeVolumesResult;
 
 			}
-			else throw new Exception(response.getStatusLine().toString());
+			else throw new HttpException(response.getStatusLine().toString());
 		} finally {
 		    response.close();
 		}
 	}
 
+	
+	/*
+	Creates a snapshot of an SBS volume. You can use snapshots for backups, to make copies of SBS volumes, and to save data before shutting down an instance. When a snapshot is created, any Marketplace product codes that are associated with the source volume are propagated to the snapshot.
+	You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your SBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending.
+	To create a snapshot for SBS volumes that serve as root devices, you should stop the instance before taking the snapshot.
+	Specified by:
+	createSnapshot in interface JCSCompute
+	Parameters:
+	createSnapshotRequest - Contains the parameters for CreateSnapshot.
+	Returns:
+	Result of the CreateSnapshot operation returned by the service.
+	*/
+	
 	@Override
 	public CreateSnapshotResult createSnapshot(
-			CreateSnapshotRequest createSnapshotRequest) throws Exception {
+			CreateSnapshotRequest createSnapshotRequest) throws InvalidKeyException, NoSuchAlgorithmException, IllegalStateException, ClientProtocolException, IOException, JAXBException, HttpException{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "CreateSnapshot");
 		
@@ -224,15 +296,27 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 				return createSnapshotResult;
 
 			}
-			else throw new Exception(response.getStatusLine().toString());
+			else throw new HttpException(response.getStatusLine().toString());
 		} finally {
 		    response.close();
 		}
 	}
 
+	
+	/*
+	Deletes the specified snapshot.
+	When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume.
+	Specified by:
+	deleteSnapshot in interface JCSCompute
+	Parameters:
+	deleteSnapshotRequest - Contains the parameters for DeleteSnapshot.
+	Returns:
+	Result of the DeleteSnapshot operation returned by the service.
+	*/
+	
 	@Override
 	public DeleteSnapshotResult deleteSnapshot(
-			DeleteSnapshotRequest deleteSnapshotRequest) throws Exception {
+			DeleteSnapshotRequest deleteSnapshotRequest) throws InvalidKeyException, NoSuchAlgorithmException, IllegalStateException, ClientProtocolException, IOException, JAXBException, HttpException{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "DeleteSnapshot");
 		if(deleteSnapshotRequest.getSnapshotId() != null){
@@ -263,15 +347,26 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 				return deleteSnapshotResult;
 
 			}
-			else throw new Exception(response.getStatusLine().toString());
+			else throw new HttpException(response.getStatusLine().toString());
 		} finally {
 		    response.close();
 		}
 	}
 
+	/*
+	Describes one or more of the SBS snapshots available to you. The list of snapshots returned can be modified by specifying snapshot IDs. If no options are specified, JCS Compute returns all snapshots.
+	If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results.
+	Specified by:
+	describeSnapshots in interface JCSCompute
+	Parameters:
+	describeSnapshotsRequest - Contains the parameters for DescribeSnapshots.
+	Returns:
+	Result of the DescribeSnapshots operation returned by the service.
+	*/
+	
 	@Override
 	public DescribeSnapshotsResult describeSnapshots(
-			DescribeSnapshotsRequest describeSnapshotsRequest) throws Exception {
+			DescribeSnapshotsRequest describeSnapshotsRequest) throws InvalidKeyException, NoSuchAlgorithmException, IllegalStateException, ClientProtocolException, IOException, JAXBException, HttpException{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "DescribeSnapshots");
 		if(describeSnapshotsRequest.getMaxResults() != null){
@@ -320,7 +415,7 @@ public class JCSComputeClient extends JCSHttpClient implements JCSCompute{
 				return describeSnapshotsResult;
 
 			}
-			else throw new Exception(response.getStatusLine().toString());
+			else throw new HttpException(response.getStatusLine().toString());
 		} finally {
 		    response.close();
 		}

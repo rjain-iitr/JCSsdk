@@ -1,74 +1,28 @@
 import java.io.Serializable;
 
-/**
- * A simple result wrapper around the Volume object that was sent over the wire.
- */
 public class CreateVolumeResult extends JCSResult implements Serializable, Cloneable {
 
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     */
+   
     private Volume volume;
-
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     * 
-     * @param volume
-     *        Describes a volume.
-     */
 
     public void setVolume(Volume volume) {
         this.volume = volume;
     }
 
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     * 
-     * @return Describes a volume.
-     */
-
+    
     public Volume getVolume() {
         return this.volume;
     }
 
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     * 
-     * @param volume
-     *        Describes a volume.
-     * @return Returns a reference to this object so that method calls can be
-     *         chained together.
-     */
-
+    
     public CreateVolumeResult withVolume(Volume volume) {
         setVolume(volume);
         return this;
     }
 
-    /**
-     * Returns a string representation of this object; useful for testing and
-     * debugging.
-     *
-     * @return A string representation of this object.
-     *
-     * @see java.lang.Object#toString()
-     */
+    
     @Override
     public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("{");
-//        if (getVolume() != null)
-//            sb.append("Volume: " + getVolume());
-//        sb.append("}");
-//        return sb.toString();
     	return this.getXml();
     }
 

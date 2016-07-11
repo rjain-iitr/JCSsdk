@@ -1,8 +1,4 @@
 
-
-/**
- * Simple implementation of AWSCredentialsProvider that just wraps static AWSCredentials.
- */
 public class StaticCredentialsProvider implements JCSCredentialsProvider {
 
     private final JCSCredentials credentials;

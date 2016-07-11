@@ -2,13 +2,13 @@
 public interface JCSCredentialsProvider {
 
     /**
-     * Returns AWSCredentials which the caller can use to authorize an AWS request.
-     * Each implementation of AWSCredentialsProvider can chose its own strategy for
+     * Returns JCSCredentials which the caller can use to authorize an JCS request.
+     * Each implementation of JCSCredentialsProvider can chose its own strategy for
      * loading credentials.  For example, an implementation might load credentials
      * from an existing key management system, or load new credentials when
      * credentials are rotated.
      *
-     * @return AWSCredentials which the caller can use to authorize an AWS request.
+     * @return JCSCredentials which the caller can use to authorize an JCS request.
      */
     public JCSCredentials getCredentials();
 

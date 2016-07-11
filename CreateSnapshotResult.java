@@ -1,74 +1,36 @@
 import java.io.Serializable;
 
-/**
- * A simple result wrapper around the Volume object that was sent over the wire.
- */
+
 public class CreateSnapshotResult extends JCSResult implements Serializable, Cloneable {
 
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     */
+    
     private Snapshot snapshot;
 
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     * 
-     * @param volume
-     *        Describes a volume.
-     */
+    public CreateSnapshotResult(){
+    	
+    }
+    
 
     public void setSnapshot(Snapshot snapshot) {
         this.snapshot = snapshot;
     }
 
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     * 
-     * @return Describes a volume.
-     */
+    
 
     public Snapshot getSnapshot() {
         return this.snapshot;
     }
 
-    /**
-     * <p>
-     * Describes a volume.
-     * </p>
-     * 
-     * @param volume
-     *        Describes a volume.
-     * @return Returns a reference to this object so that method calls can be
-     *         chained together.
-     */
+    
 
     public CreateSnapshotResult withSnapshot(Snapshot snapshot) {
         setSnapshot(snapshot);
         return this;
     }
 
-    /**
-     * Returns a string representation of this object; useful for testing and
-     * debugging.
-     *
-     * @return A string representation of this object.
-     *
-     * @see java.lang.Object#toString()
-     */
+    
     @Override
     public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("{");
-//        if (getVolume() != null)
-//            sb.append("Volume: " + getVolume());
-//        sb.append("}");
-//        return sb.toString();
     	return this.getXml();
     }
 

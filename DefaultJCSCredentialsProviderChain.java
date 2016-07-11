@@ -3,9 +3,6 @@ public class DefaultJCSCredentialsProviderChain extends JCSCredentialsProviderCh
 	
 	public DefaultJCSCredentialsProviderChain() {
         super(new EnvironmentVariableCredentialsProvider(),
-              new SystemPropertiesCredentialsProvider());
-//              new ProfileCredentialsProvider(),
-//              new InstanceProfileCredentialsProvider());
-    
+              new SystemPropertiesCredentialsProvider());    
 	}
 }

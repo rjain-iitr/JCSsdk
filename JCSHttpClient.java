@@ -1,5 +1,11 @@
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+
 import org.apache.http.annotation.ThreadSafe;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -19,7 +25,7 @@ public abstract class JCSHttpClient {
 		headers.put("Accept-Encoding","identity");
 	}
 	
-	protected CloseableHttpResponse makeRequest(JCSCredentials credentials, Map<String,String> params, Map<String, String> headers) throws Exception{
+	protected CloseableHttpResponse makeRequest(JCSCredentials credentials, Map<String,String> params, Map<String, String> headers) throws InvalidKeyException, NoSuchAlgorithmException, IllegalStateException, ClientProtocolException, IOException{
 		addCustomHeaders(headers);
 		Authorization authorization = new Authorization(endpoint.toString() , "POST", credentials.getJCSAccessKey(),credentials.getJCSSecretKey(), headers);
 		authorization.addAuthorization(params);

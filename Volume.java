@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Volume implements Serializable, Cloneable {
+	
     private String volumeId;
 
     private Integer size;

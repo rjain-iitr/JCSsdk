@@ -1,9 +1,5 @@
 
-/**
- * {@link AWSCredentialsProvider} implementation that provides credentials
- * by looking at the: <code>AWS_ACCESS_KEY_ID</code> (or <code>AWS_ACCESS_KEY</code>) and
- * <code>AWS_SECRET_KEY</code> (or <code>AWS_SECRET_ACCESS_KEY</code>) environment variables.
- */
+
 public class EnvironmentVariableCredentialsProvider implements JCSCredentialsProvider {
     @Override
     public JCSCredentials getCredentials(){
@@ -16,7 +12,7 @@ public class EnvironmentVariableCredentialsProvider implements JCSCredentialsPro
         if (Utils.isNullOrEmpty(accessKey) || Utils.isNullOrEmpty(secretKey)) {
 
             throw new RuntimeException(
-                    "Unable to load AWS credentials from environment variables " +
+                    "Unable to load JCS credentials from environment variables " +
                     "(" + accessKey + ") and (" + secretKey + ")");
         }
 

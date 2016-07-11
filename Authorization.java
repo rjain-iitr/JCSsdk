@@ -21,7 +21,7 @@ public class Authorization {
 	String host;
 	String port;
 	
-	public Authorization(String url, String verb, String accessKey, String secretKey, Map<String, String> headers) throws Exception{
+	public Authorization(String url, String verb, String accessKey, String secretKey, Map<String, String> headers){
 		this.verb = verb;
 		this.accessKey = accessKey;
 		this.secretKey = secretKey;
@@ -29,7 +29,7 @@ public class Authorization {
 		this.path = "/";
 		ProtocolAndHost protocolAndHost = Utils.getProtocolAndHost(url);
 		if(!Arrays.asList(new String[]{"http","https"}).contains(protocolAndHost.protocol)){
-			throw new Exception("Unsupported protocol present in given url :"+url);
+			throw new RuntimeException("Unsupported protocol present in given url :"+url);
 		}
 		this.protocol = protocolAndHost.protocol;
 		this.host = protocolAndHost.host;
@@ -46,7 +46,6 @@ public class Authorization {
 		params.put("SignatureVersion", "2");
 		params.put("SignatureMethod", "HmacSHA256");
 		params.put("Version", "2016-03-01");
-		//params.put("Timestamp", "2016-06-23T12:09:03Z");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		params.put("Timestamp", sdf.format(Calendar.getInstance().getTime()));
@@ -61,7 +60,6 @@ public class Authorization {
 	public String sortParams(Map<String, String> params) throws UnsupportedEncodingException{
 		List<String> sortedKeys = new ArrayList<String>(params.keySet());
 		Collections.sort(sortedKeys);
-		//Map<String, String> pairs = new HashMap<String, String>();
 		String value;
 		String qs="";
 		for(String key: sortedKeys){

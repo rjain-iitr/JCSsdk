@@ -8,24 +8,10 @@ public class JCStry {
 
 
     static JCSCompute jcs;
-    /**
-     * The only information needed to create a client are security credentials
-     * consisting of the AWS Access Key ID and Secret Access Key. All other
-     * configuration, such as the service endpoints, are performed
-     * automatically. Client parameters, such as proxies, can be specified in an
-     * optional ClientConfiguration object when constructing a client.
-     *
-     * @see com.amazonaws.auth.BasicAWSCredentials
-     * @see com.amazonaws.auth.PropertiesCredentials
-     * @see com.amazonaws.ClientConfiguration
-     */
-    private static void init() throws Exception {
+    
+    private static void init(){
 
-        /*
-         * The ProfileCredentialsProvider will return your [default]
-         * credential profile by reading from the credentials file located at
-         * (/home/shubham/.aws/credentials).
-         */
+       
         JCSCredentials credentials = new JCSCredentials() {
 
         		@Override
@@ -44,7 +30,7 @@ public class JCStry {
             };
             
         jcs = new JCSComputeClient(credentials);
-        //jcs.setEndpoint("https://compute.ind-west-1.staging.jiocloudservices.com");
+      
         
     }
 
@@ -52,7 +38,7 @@ public class JCStry {
     
     
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
 
        init();
 
@@ -60,36 +46,47 @@ public class JCStry {
         try {
                         
 //            CreateVolumeRequest createVolumeRequest = new CreateVolumeRequest();
-//            createVolumeRequest.setSize(5);
-//            createVolumeRequest.setSnapshotId("6dca164c-bb90-45ae-8d01-9832966c16a2");
+//            //createVolumeRequest.setSnapshotId("1613998c-d78a-4504-b474-e175819ca1f9");
 //            CreateVolumeResult createVolumeResult = jcs.createVolume(createVolumeRequest);
-//            System.out.println(createVolumeResult.toString());
+//            //System.out.println(createVolumeResult.toString());
+//            System.out.println(createVolumeResult.getVolume().getVolumeId());
+//            System.out.println(createVolumeResult.getVolume().getStatus());
+//            System.out.println(createVolumeResult.getVolume().getCreateTime());
 //            
-//            DeleteVolumeRequest deleteVolumeRequest = new DeleteVolumeRequest().withVolumeId("703eace6-dd8a-4841-a359-d6d333e59944");
+//            DeleteVolumeRequest deleteVolumeRequest = new DeleteVolumeRequest().withVolumeId("14b35b92-fe75-4e8d-9eb3-9c268374422e");
 //            DeleteVolumeResult deleteVolumeResult = jcs.deleteVolume(deleteVolumeRequest);
 //            System.out.println(deleteVolumeResult.toString());
 //            
-        	DescribeVolumesRequest describeVolumesRequest = new DescribeVolumesRequest();
-        	DescribeVolumesResult describeVolumesResult = jcs.describeVolumes(describeVolumesRequest);
-        	System.out.println(describeVolumesResult.toString());
+//        	DescribeVolumesRequest describeVolumesRequest = new DescribeVolumesRequest().withVolumeIds("5388580c-5745-486f-b0c8-6ab363fa0a85");
+//        	DescribeVolumesResult describeVolumesResult = jcs.describeVolumes(describeVolumesRequest);
+//        	System.out.println(describeVolumesResult.toString());
         	
-//        	List<Volume> volumes = describeVolumesResult.getVolumes();
-//        	for(Volume volume:volumes){
-//        		System.out.println(volume.toString());
-//        	}
-//        	
+//        	        	
 //        	CreateSnapshotRequest createSnapshotRequest = new CreateSnapshotRequest()
-//        													.withVolumeId("dcf77516-92e0-4406-b5f4-9550f7d0f34b");
+//        													.withVolumeId("5388580c-5745-486f-b0c8-6ab363fa0a85");
 //        	CreateSnapshotResult createSnapshotResult = jcs.createSnapshot(createSnapshotRequest);
+//        	System.out.println(createSnapshotResult.toString());
         	
 //        	DeleteSnapshotRequest deleteSnapshotRequest = new DeleteSnapshotRequest().
-//        							withSnapshotId("4c43dd83-0856-43ba-857d-59a4a7492785");
+//        							withSnapshotId("1613998c-d78a-4504-b474-e175819ca1f9");
 //        	DeleteSnapshotResult deleteSnapshotResult = jcs.deleteSnapshot(deleteSnapshotRequest);
-//        	
+//        	System.out.println(deleteSnapshotResult.toString());
 //      	
-//        	DescribeSnapshotsRequest describeSnapshotsRequest = new DescribeSnapshotsRequest();
-//        	DescribeSnapshotsResult describeSnapshotsResult = jcs.describeSnapshots(describeSnapshotsRequest);
-//        	System.out.println(describeSnapshotsResult.toString());
+        	DescribeSnapshotsRequest describeSnapshotsRequest = new DescribeSnapshotsRequest();
+        	DescribeSnapshotsResult describeSnapshotsResult = jcs.describeSnapshots(describeSnapshotsRequest);
+        	System.out.println(describeSnapshotsResult.toString());
+        	System.out.println(describeSnapshotsResult.getSnapshots());
+        	
+//        	CreateVolumeRequest createVolumeRequest = new CreateVolumeRequest()
+//        						.withSize(10)
+//        						.withSnapshotId("a247ced0-4e94-40ec-887c-de3bbb0b19d2");
+//        	CreateVolumeResult createVolumeResult = jcs.createVolume(createVolumeRequest);
+//        	System.out.println(createVolumeResult.getVolume());
+        	
+//        	DeleteVolumeRequest deleteVolumeRequest = new DeleteVolumeRequest().withVolumeId("df28d289-0436-48e6-9b0f-07ced523ded2");
+//        	DeleteVolumeResult  deleteVolumeResult = jcs.deleteVolume(deleteVolumeRequest);
+        
+        
         } catch (Exception e) {
         	e.printStackTrace();
         
